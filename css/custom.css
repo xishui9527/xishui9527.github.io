@@ -2,7 +2,7 @@
 #aside-content > .card-widget.card-info {
   background: linear-gradient(
     -45deg,
-    #dacef3,
+    #734ec4,
     #a9bfed,
     #b9eded
   );
@@ -55,6 +55,7 @@
   /* 个人信息Follow me按钮 */
   #aside-content > .card-widget.card-info > #card-info-btn {
     background-color: #8b9be7;
+    border-radius: 14px;
   }
 
 
