@@ -114,3 +114,27 @@ div#archive {
   height: 4.2em;
   border-radius: 20%;
 }
+
+/* 标签栏 分类栏 图片 */
+.article-sort-item-img {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  border-radius: 20%;
+}
+
+/* 文章页面 相关推荐 图片 */
+.relatedPosts > .relatedPosts-list > div {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin: 3px;
+  width: calc(33.333% - 6px);
+  height: 200px;
+  background: #000;
+  vertical-align: bottom;
+  border-radius: 15%;
+}
+
+
+
