@@ -137,4 +137,13 @@ div#archive {
 }
 
 
-
+.fa-shake, .fa-spin {
+  -webkit-animation-delay: initial;
+  animation-delay: initial;
+  -webkit-animation-direction: initial;
+  animation-direction: initial;
+  -webkit-animation-duration: initial;
+  animation-duration: initial;
+  -webkit-animation-iteration-count: initial;
+  animation-iteration-count: initial;
+}
