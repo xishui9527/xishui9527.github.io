@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Rmarkdown教程</title>
+      <link href="/2023/10/05/Rmarkdown%E6%95%99%E7%A8%8B/"/>
+      <url>/2023/10/05/Rmarkdown%E6%95%99%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="R-markdown简介"><a href="#R-markdown简介" class="headerlink" title="R markdown简介"></a>R markdown简介</h1><p>R Markdown是R语⾔环境中提供的Markdown编辑⼯具，⽤R Markdown撰写⽂章，既可以像⼀般的Markdown编辑器⼀样编辑⽂本，也可以插⼊代码块，并将代码运⾏结果输出在Markdown⾥。这种格式我们称之为R Markdown格式，简称为Rmd格式，相应的源⽂件扩展名为.Rmd。输出格式可以是HTML、docx、pdf等。</p><p>对于经常使⽤R语⾔（不止R，也支持其他语言，如Python、SQL、Stan等）的人来说，比如我们，别人偶尔可能会需要复现我们的工作，那么这个时候，R Markdown就可以助我们一臂之力，以便于他人实现工作复现。可以说Rmd是又便捷又实用！</p><h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><p>R Markdown不需要R Studio，但建议使⽤R Studio，因为如果没有安装R Studio，就必须安装Pandoc，而R Studio已和它捆绑在⼀起，所以无需对其进行单独安装。<br>Rstudio中安装R Markdown软件包，可以通过下⾯任意⼀种⽅式：</p><!-- from CRAN --><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;rmarkdown&#x27;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure><!-- # install from GitHub --><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devtools<span class="operator">::</span>install_github<span class="punctuation">(</span><span class="string">&#x27;rstudio/rmarkdown&#x27;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure><p>library(rmarkdown)<br>如果要⽣成PDF输出，则需要安装LaTeX。对于从未安装过LaTeX的R Markdown⽤户，建议安装TinyTeX：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;tinytex&#x27;</span><span class="punctuation">)</span></span><br><span class="line">tinytex<span class="operator">::</span>install_tinytex<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></p><h1 id="实操R-markdown"><a href="#实操R-markdown" class="headerlink" title="实操R markdown"></a>实操R markdown</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><p>1.点击Rstudio左上⾓的新建项⽬，选择R markdown⽂件格式，就可以建⽴⼀个R Markdown的编辑⽂件。 像这样：<br>2.在弹出的框⾥，可以填写R Markdown的Title、Author以及默认的输出⽂件格式，⼀般可以选择HTML、PDF、Word格式。<br>3.在新建的R Markdown⽂件⾥，主要包含三块内容：1.YAML；2.R Markdown⽂本；3.代码块。</p><h2 id="页面介绍"><a href="#页面介绍" class="headerlink" title="页面介绍"></a>页面介绍</h2><ul><li>YAML ——— R Markdown的头部⽂件（红），YAML定义了R Markdown的性质，⽐如title、author、date、指定 output⽂件类型等。</li><li>Markdown文本 ——— Markdown⽂本是R Markdown⾥的主要内容（黄），是使用者按照Markdown语法⾃⾏编写的⽂本内容。</li><li>代码块 ——— R Markdown的⼀个主要功能是可以执⾏⽂件内的代码块（蓝），并且将代码执⾏结果展⽰在Markdown⾥。这对撰写分析报告带来了极⼤滴便利。Rmd⽂件中除了R代码段以外， 还可以插⼊Python、SQL等许多编程语⾔的代码段，常⽤编程语⾔还可以与R代码段进⾏信息交换。</li></ul><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul><li>代码块<br>R代码块⼀般通过{r}来插⼊，也可以使用快捷键：Ctrl+Alt+I / option + cmd + I，也可以直接点击右上方绿色的+C。</li></ul><h2 id="通过选项设置参数"><a href="#通过选项设置参数" class="headerlink" title="通过选项设置参数"></a>通过选项设置参数</h2><ul><li><p>eval: 加选项eval=FALSE,可以使得代码仅显⽰⽽不实际运⾏。这样的代码段如果有标签，可以在后续代码段中被引⽤。</p></li><li><p>include: 加选项include=FALSE，则本代码段仅运⾏，但是代码和结果都不写⼊到⽣成的⽂档中。</p></li><li><p>echo: echo参数控制了Markdown是否显⽰代码块。若echo=TRUE，则表⽰代码块显⽰在markdown⽂档显⽰代码块；反之，代码块不出现在输出结果中。</p></li><li><p>collapse: ⼀个代码块的代码、输出通常被分解为多个原样⽂本块中，如果⼀个代码块希望所有的代码、输出都写到同⼀个原样⽂本块中，加选项collapse=TRUE。</p></li><li><p>prompt: prompt=TRUE代码⽤R的&gt;提⽰符开始。</p></li><li><p>comment:如果希望结果不⽤#号保护，使⽤选项comment=’’。</p></li><li><p>results: ⽤选项results=选择⽂本型结果的类型。取值有：</p><ul><li>markup，这是缺省选项，会把⽂本型结果变成HTML的原样⽂本格式;</li><li>hide，运⾏了代码后不显⽰运⾏结果;</li><li>hold，⼀个代码块所有的代码都显⽰完，才显⽰所有的结果。</li><li>asis，⽂本型输出直接进⼊到HTML⽂件中，这需要R代码直接⽣成HTML标签，knitr包的kable()函数可以把数据框转换为HTML代码的表格。</li></ul></li></ul><h2 id="错误信息选项"><a href="#错误信息选项" class="headerlink" title="错误信息选项"></a>错误信息选项</h2><ul><li><p>warning，选项warning=FALSE使得代码段的警告信息不进⼊编译结果，⽽是在控制台中显⽰。有⼀些扩展包的载⼊警告可以⽤这种办法屏蔽。</p></li><li><p>error，选项error=FALSE可以使得错误信息不进⼊编译结果，⽽是出错停⽌并将错误信息在控制台中显⽰。</p></li><li><p>message，选项message=FALSE可以使得message级别的信息不进⼊编译结果，⽽是在控制台中显⽰。</p></li></ul><h2 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h2><p>1.若R Markdown内的代码块存在⼀样的参数设置，则可以提前设计好全局的代码块参数。全局代码块通过knitr::opts_chunk$set函数进⾏设置，⼀般设置在YAML⽂件下⽅。注：局部参数设置优先级大于全局参数设置。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knitr<span class="operator">::</span>opts_chunk<span class="operator">$</span>set<span class="punctuation">(</span>echo <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></p><p>2.R studio 界面直接设置参数（部分但便捷）</p><ul><li>待补充</li></ul><h2 id="图片输出"><a href="#图片输出" class="headerlink" title="图片输出"></a>图片输出</h2><p>1.插入内部输出的图片</p><ul><li>fig.show：设置了图⽚输出⽅式<ul><li>fig.show=‘asis’：表⽰plot在产⽣他们的代码后⾯</li><li>fig.show=‘hold’：所有代码产⽣的图⽚都放在⼀个完整的代码块之后</li><li>fig.show=‘animate’：表⽰将所有⽣成的图⽚合成⼀个动画图⽚</li><li>需要进行一些设置，详见<a href="https://bookdown.org/yihui/rmarkdown-cookbook/animation.html">https://bookdown.org/yihui/rmarkdown-cookbook/animation.html</a></li><li>fig.show=‘hide’：表⽰产⽣所有图⽚,但是并不展⽰</li></ul></li><li>+fig.width：设置图⽚输出的宽度</li><li>fig.height：设置图⽚输出的⾼度<br>  也可直接在R studio界面进行设置</li><li>fig.align：设置图⽚位置排版格式，默认为left,可以为right或者center</li><li>fig.cap ：设置图⽚的标题</li><li>fig.subcap：设置图⽚的副标题</li><li>out.width和out.height选项指定在输出中实际显⽰的宽和⾼，如果使⽤如”90%”这样的百分数单位则可以⾃适应输出的⼤⼩。</li></ul><p>2.插入外部图片</p><p>图片不是由R代码生成，有两种方法插入：</p><ul><li><p>第一种：使⽤Markdown语法，你可以使⽤width和height属性来设置图像的⼤⼩。</p>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![caption](xxx.png)&#123;width=50%&#125;</span><br></pre></td></tr></table></figure><p>  注意：图⽚⽂件放的位置（如果和Rmd同⼀⽬录，可以直接xxx.png；如果在其他位置要加上相对路径）。</p></li><li><p>第二种：在visual状态下，直接外部拉⼊图形即可，会⾃动保存在相对⽂件夹的images文件夹中，或者点击图形按钮导⼊。</p></li><li><p>在代码块中使⽤knitr函数knitr::include_graphics()。图⽚尺⼨更改与插⼊R代码⽣成的图形的情况相同。</p></li></ul><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><p>⼿动点击Knit按钮，选择导出格式类型即可，Rstudio⽀持导出PDF、html、word三种类型。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> R </tag>
+            
+            <tag> Rmarkdown </tag>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>个人介绍</title>
       <link href="/2023/09/30/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/"/>
       <url>/2023/09/30/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/</url>
