@@ -19,7 +19,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false,"highlightHeightLimit":30},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":30},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -58,7 +58,7 @@
   title: 'Rmarkdown教程',
   isPost: true,
   isHome: false,
-  isHighlightShrink: false,
+  isHighlightShrink: true,
   isToc: true,
   postUpdate: '2023-10-05 17:56:16'
 }</script><noscript><style type="text/css">
@@ -189,10 +189,10 @@
 <p>对于经常使⽤R语⾔（不止R，也支持其他语言，如Python、SQL、Stan等）的人来说，比如我们，别人偶尔可能会需要复现我们的工作，那么这个时候，R Markdown就可以助我们一臂之力，以便于他人实现工作复现。可以说Rmd是又便捷又实用！</p>
 <h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><p>R Markdown不需要R Studio，但建议使⽤R Studio，因为如果没有安装R Studio，就必须安装Pandoc，而R Studio已和它捆绑在⼀起，所以无需对其进行单独安装。<br>Rstudio中安装R Markdown软件包，可以通过下⾯任意⼀种⽅式：</p>
 <!-- from CRAN -->
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;rmarkdown&#x27;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;rmarkdown&#x27;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <!-- # install from GitHub -->
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devtools<span class="operator">::</span>install_github<span class="punctuation">(</span><span class="string">&#x27;rstudio/rmarkdown&#x27;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>library(rmarkdown)<br>如果要⽣成PDF输出，则需要安装LaTeX。对于从未安装过LaTeX的R Markdown⽤户，建议安装TinyTeX：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;tinytex&#x27;</span><span class="punctuation">)</span></span><br><span class="line">tinytex<span class="operator">::</span>install_tinytex<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">devtools<span class="operator">::</span>install_github<span class="punctuation">(</span><span class="string">&#x27;rstudio/rmarkdown&#x27;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>library(rmarkdown)<br>如果要⽣成PDF输出，则需要安装LaTeX。对于从未安装过LaTeX的R Markdown⽤户，建议安装TinyTeX：<br><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;tinytex&#x27;</span><span class="punctuation">)</span></span><br><span class="line">tinytex<span class="operator">::</span>install_tinytex<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="实操R-markdown"><a href="#实操R-markdown" class="headerlink" title="实操R markdown"></a>实操R markdown</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><p>1.点击Rstudio左上⾓的新建项⽬，选择R markdown⽂件格式，就可以建⽴⼀个R Markdown的编辑⽂件。 像这样：<br>2.在弹出的框⾥，可以填写R Markdown的Title、Author以及默认的输出⽂件格式，⼀般可以选择HTML、PDF、Word格式。<br>3.在新建的R Markdown⽂件⾥，主要包含三块内容：1.YAML；2.R Markdown⽂本；3.代码块。</p>
 <h2 id="页面介绍"><a href="#页面介绍" class="headerlink" title="页面介绍"></a>页面介绍</h2><ul>
 <li>YAML ——— R Markdown的头部⽂件（红），YAML定义了R Markdown的性质，⽐如title、author、date、指定 output⽂件类型等。</li>
@@ -232,7 +232,7 @@
 <li><p>message，选项message=FALSE可以使得message级别的信息不进⼊编译结果，⽽是在控制台中显⽰。</p>
 </li>
 </ul>
-<h2 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h2><p>1.若R Markdown内的代码块存在⼀样的参数设置，则可以提前设计好全局的代码块参数。全局代码块通过knitr::opts_chunk$set函数进⾏设置，⼀般设置在YAML⽂件下⽅。注：局部参数设置优先级大于全局参数设置。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knitr<span class="operator">::</span>opts_chunk<span class="operator">$</span>set<span class="punctuation">(</span>echo <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h2><p>1.若R Markdown内的代码块存在⼀样的参数设置，则可以提前设计好全局的代码块参数。全局代码块通过knitr::opts_chunk$set函数进⾏设置，⼀般设置在YAML⽂件下⽅。注：局部参数设置优先级大于全局参数设置。<br><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">knitr<span class="operator">::</span>opts_chunk<span class="operator">$</span>set<span class="punctuation">(</span>echo <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></p>
 <p>2.R studio 界面直接设置参数（部分但便捷）</p>
 <ul>
 <li>待补充</li>
@@ -258,7 +258,7 @@
 <p>图片不是由R代码生成，有两种方法插入：</p>
 <ul>
 <li><p>第一种：使⽤Markdown语法，你可以使⽤width和height属性来设置图像的⼤⼩。</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![caption](xxx.png)&#123;width=50%&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">![caption](xxx.png)&#123;width=50%&#125;</span><br></pre></td></tr></table></figure>
 <p>  注意：图⽚⽂件放的位置（如果和Rmd同⼀⽬录，可以直接xxx.png；如果在其他位置要加上相对路径）。</p>
 </li>
 <li><p>第二种：在visual状态下，直接外部拉⼊图形即可，会⾃动保存在相对⽂件夹的images文件夹中，或者点击图形按钮导⼊。</p>
